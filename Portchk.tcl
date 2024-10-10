@@ -66,7 +66,7 @@ proc portchk_scan_pub {nick uhost hand chan text} {
 		putquick "NOTICE $nick :Usage: $portchk_setting(cmd_pub) <host> <port>"
 	} else {
 		if {[catch {set sock [socket -async $host $port]} error]} {
-			putquick "PRIVMSG $chan :15\[portchk4!15\] Connection to $host \($port\) was refused."
+			putquick "PRIVMSG $chan :\[portchk!\] Connection to $host \($port\) was refused."
 		} else {
 			set timerid [utimer 15 [list portchk_timeout_pub $chan $sock $host $port]]
 			fileevent $sock writable [list portchk_connected_pub $chan $sock $host $port $timerid]
@@ -122,16 +122,16 @@ proc portchk_connected_pub {chan sock host port timerid} {
 	set error [fconfigure $sock -error]
 	if {$error != ""} {
 		close $sock
-		putquick "PRIVMSG $chan :15\[portchk4!15\] Connection to $host \($port\) failed. \([string totitle $error]\)"
+		putquick "PRIVMSG $chan :\[portchk!\] Connection to $host \($port\) failed. \([string totitle $error]\)"
 	} else {
 		fileevent $sock writable {}
 		fileevent $sock readable [list portchk_read_pub $chan $sock $host $port]
-		putquick "PRIVMSG $chan :15\[portchk4!15\] Connection to $host \($port\) accepted."
+		putquick "PRIVMSG $chan :\[portchk!\] Connection to $host \($port\) accepted."
 	}
 }
 proc portchk_timeout_pub {chan sock host port} {
 	close $sock
-	putquick "PRIVMSG $chan :15\[portchk4!15\] Connection to $host \($port\) timed out."
+	putquick "PRIVMSG $chan :\[portchk!\] Connection to $host \($port\) timed out."
 }
 proc portchk_connected_join {nick chan sock host port timerid} {
 	global portchk_setting botnick
