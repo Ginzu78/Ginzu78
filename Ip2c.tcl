@@ -1,8 +1,9 @@
 #
 #  TCL scripts by Ofloo all rights reserved.
 #
-#  HomePage: https://whatismyipaddress.com/
-#  
+#  HomePage: http://ofloo.net/
+#  CVS: http://cvs.ofloo.net/
+#  Email: support[at]ofloo.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
